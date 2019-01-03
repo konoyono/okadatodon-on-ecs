@@ -1,0 +1,14 @@
+version: '2'
+services:
+  streaming:
+    image: gargron/mastodon:v2.0.0
+    env_file: ../.env.production
+    command: ["npm", "run", "start"]
+    ports:
+      - "4000:4000"
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: okadatodon-fargate-demo
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: streaming

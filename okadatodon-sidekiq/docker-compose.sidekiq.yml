@@ -1,0 +1,12 @@
+version: '2'
+services:
+  sidekiq:
+    image: gargron/mastodon:v2.0.0
+    env_file: ../.env.production
+    command: ["sidekiq", "-q", "default", "-q", "mailers", "-q", "pull", "-q", "push"]
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: okadatodon-fargate-demo
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: sidekiq
